@@ -2,7 +2,7 @@
 
 @section('main')
 <div class="container">
-  <h1 class="mt-5">Dettaglio post {{ $post->title }}</h1>
+  <h1 class="mt-5">Dettaglio post: <span class="text-secondary">{{ $post->title }}</span></h1>
   <p><strong>Post status:</strong> {{ $post->infoPost->post_status }}</p>
   <p><strong>Comment status:</strong> {{ $post->infoPost->comment_status }}</p>
   <table class="table table-light table-striped table-bordered">
