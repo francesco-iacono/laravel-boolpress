@@ -11,7 +11,15 @@
       <td><strong>{{ $key }}</strong></td>
       <td>{{ $value }}</td>
     </tr>
-        
+    @endforeach
+  </table>
+  <h3>Commenti</h3>
+  <table class="table table-light table-striped table-bordered">
+    @foreach ($post->comments as $comment)
+      <tr>
+        <td><strong>{{ $comment->author }}</strong></td>
+        <td>{{ $comment->text }}</td>
+      </tr>  
     @endforeach
   </table>
   <div class="text-right">
