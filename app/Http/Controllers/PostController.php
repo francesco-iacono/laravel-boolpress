@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use App\InfoPost;
+use App\Tag;
 use Illuminate\Support\Str;
 
 
@@ -28,7 +29,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view("posts.create");
+        $tags = Tag::all();
+        return view("posts.create", compact('tags'));
     }
 
     /**

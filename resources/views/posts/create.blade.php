@@ -57,6 +57,14 @@
           <option value="private" {{(old('comment_status') == 'private') ? 'selected' : '' }}>private</option>
         </select>
       </div>
+      @foreach ($tags as $tag)
+      <div class="form-group">
+        <div class="custom-control custom-checkbox">
+          <input class="custom-control-input" type="checkbox" id="tag-{{ $tag->id }}" name="tags" value="{{ $tag->id }}">
+          <label class="custom-control-label" for="tag-{{ $tag->id }}">{{ $tag->name }}</label>
+        </div>  
+      </div>        
+      @endforeach
       <button type="submit" class="btn btn-primary">Salva</button>
       <a href="{{ route('posts.index') }}" class="btn btn-secondary">Indietro</a>
     </form>
