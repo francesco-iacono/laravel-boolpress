@@ -14613,3 +14613,6 @@ h3 {
     border-color: #dee2e6;
   }
 }
+.index-posts img {
+  width: 100px;
+}

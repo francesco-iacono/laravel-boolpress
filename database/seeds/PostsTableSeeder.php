@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Post;
 use Faker\Generator as Faker;
+use Illuminate\Support\Str;
 
 class PostsTableSeeder extends Seeder
 {
@@ -18,6 +19,7 @@ class PostsTableSeeder extends Seeder
             $newPost = new Post();
             // valorizzazione proprietà
             $newPost->title = $faker->sentence(12);
+            $newPost->slug = Str::slug($newPost->title);
             $newPost->subtitle = $faker->sentence(6);
             $newPost->text = $faker->text(5000);
             $newPost->author = $faker->name;

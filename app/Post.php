@@ -12,7 +12,8 @@ class Post extends Model
         'text',
         'author',
         'img_path',
-        'publication_date'
+        'publication_date',
+        'slug'
     ];
 
     // DB relationships

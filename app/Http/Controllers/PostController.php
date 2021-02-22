@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use App\InfoPost;
+use Illuminate\Support\Str;
+
 
 class PostController extends Controller
 {
@@ -25,7 +28,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view("posts.create");
     }
 
     /**
@@ -36,7 +39,32 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $data['slug'] = Str::slug($data['title']);
+        
+        $request->validate(
+            [
+                'title'  => 'required|max:150',
+                'subtitle' => 'required|max:100',
+                'author' => 'required|max:60',
+                'img_path' => 'required|string|max:255',
+                'publication_date' => 'required|date'
+        ]);
+        
+        // creazione e salvataggio del post
+        $post = new Post();
+        $post->fill($data);
+        $postSaveResult = $post->save();
+
+        // creazione e salvataggio InfoPost
+        $data['post_id'] = $post->id;
+        $infoPost = new InfoPost();
+        $infoPost->fill($data);
+        $infoPostSaveResult = $infoPost->save();
+
+        return redirect()
+                ->route('posts.index')
+                ->with('message', 'Post ' . $post->name . ' creato correttamente!');
     }
 
     /**
@@ -56,9 +84,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -68,9 +96,29 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
-        //
+        $data = $request->all();
+        $data['slug'] = Str::slug($data['title']);
+
+        $request->validate(
+            [
+                'title'  => 'required|max:150',
+                'subtitle' => 'required|max:100',
+                'author' => 'required|max:60',
+                'img_path' => 'required|string|max:255',
+                'publication_date' => 'required|date'
+        ]);
+
+        $post->update($data);
+
+        $infoPost = InfoPost::where('post_id', $post->id)->first();
+        $data['post_id'] = $post->id;
+        $infoPost->update($data);
+
+        return redirect()
+                ->route('posts.index')
+                ->with('message', 'Post' . $post->name . ' aggiornato correttamente!');
     }
 
     /**
