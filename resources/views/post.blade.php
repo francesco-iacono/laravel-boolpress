@@ -4,10 +4,15 @@
   <div class="container">
     <section id='article'>
       <div class="text-center">
-        <img src="{{ $post->img_path }}" alt="{{ $post->title }}">
+        <img src="{{ $post->img_path }}" alt="{{ $post->title }}" class="p-5">
         <h1>{{ $post->title }}</h1>
         <h3>{{ $post->subtitle }}</h3>
         <small>{{ $post->author }} - {{ $post->publication_date }}</small>
+        <div class="p-3">
+          @foreach ($post->tags as $tag)
+            <span class="badge badge-info">{{ $tag->name }}</span>
+          @endforeach
+        </div>
       </div>
       <div>
         {{ $post->text }}
@@ -35,7 +40,7 @@
             <label for="text">Testo</label>
             <textarea name="text" class="form-control" id="text" cols="30" rows="6" placeholder="Scrivi il tuo commento"></textarea>
           </div>
-          <input type="submit" value="Invia" class="btn btn-secondary">
+          <input type="submit" value="Invia" class="btn btn-secondary my-3">
         </form>
       </section>
     @endif
