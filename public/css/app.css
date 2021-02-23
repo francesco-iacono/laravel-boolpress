@@ -14616,3 +14616,7 @@ h3 {
 .index-posts img {
   width: 100px;
 }
+
+.show-blog img {
+  width: 100%;
+}

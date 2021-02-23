@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('main')
-  <div class="container">
+  <div class="container show-blog ">
     <section id='article'>
       <div class="text-center">
         <img src="{{ $post->img_path }}" alt="{{ $post->title }}" class="p-5">
@@ -41,6 +41,7 @@
             <textarea name="text" class="form-control" id="text" cols="30" rows="6" placeholder="Scrivi il tuo commento"></textarea>
           </div>
           <input type="submit" value="Invia" class="btn btn-secondary my-3">
+          <a href="{{ route('blog') }}" class="btn btn-primary">Torna al blog</a>
         </form>
       </section>
     @endif

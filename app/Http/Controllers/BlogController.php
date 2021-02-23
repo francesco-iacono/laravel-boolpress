@@ -9,6 +9,17 @@ use App\Comment;
 class BlogController extends Controller
 {
     /*
+    *   articoli
+    */
+    public function index() {
+        // usare first per ottenere un solo modello rispetto a get che restituisce un intera collection
+        $posts = Post::all();
+        
+        return view('blog', compact('posts')); //compact sostituisce 'post' => $post
+    }
+
+
+    /*
     *   Dettaglio articolo
     */
     public function show($slug) {
