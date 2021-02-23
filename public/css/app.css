@@ -14620,3 +14620,7 @@ h3 {
 .show-blog img {
   width: 100%;
 }
+
+.images-form img {
+  width: 60px;
+}

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\InfoPost;
 use App\Tag;
+use App\Image;
 use Illuminate\Support\Str;
 
 
@@ -31,7 +32,8 @@ class PostController extends Controller
     public function create()
     {
         $tags = Tag::all();
-        return view("posts.create", compact('tags'));
+        $images = Image::all();
+        return view("posts.create", compact('tags', 'images'));
     }
 
     /**
@@ -68,6 +70,10 @@ class PostController extends Controller
         if ($postSaveResult && !empty($data['tags'])) { //controllo in caso di mancato salvataggio
                 $post->tags()->attach($data['tags']);
         }
+
+        if ($postSaveResult && !empty($data['images'])) { //controllo in caso di mancato salvataggio
+            $post->images()->attach($data['images']);
+    }
 
         return redirect()
                 ->route('posts.index')
