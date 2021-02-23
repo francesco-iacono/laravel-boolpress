@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@dump($posts)
 @section('main')
   <div class="container">
     <div class="row">

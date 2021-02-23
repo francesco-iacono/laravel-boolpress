@@ -100,7 +100,8 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $tags = Tag::all();
-        return view('posts.edit', compact('post', 'tags'));
+        $images = Image::all();
+        return view('posts.edit', compact('post', 'tags', 'images'));
     }
 
     /**
@@ -130,10 +131,19 @@ class PostController extends Controller
         $data['post_id'] = $post->id;
         $infoPost->update($data);
 
+
+        //tags
         if(empty($data['tags'])) {
             $post->tags()->detach();
         } else {
             $post->tags()->sync($data['tags']);
+        }
+
+         //images
+         if(empty($data['images'])) {
+            $post->images()->detach();
+        } else {
+            $post->images()->sync($data['images']);
         }
 
         return redirect()
